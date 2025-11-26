@@ -1,12 +1,12 @@
-require('dotenv').config();
+import dotenv from 'dotenv';
+import express, { Request, Response } from 'express';
+import mongoose from 'mongoose';
+import employeeRoutes from './routes/employeeRoutes';
 
-const express = require('express');
-const mongoose = require('mongoose');
+dotenv.config();
 
 const app = express();
-
-const PORT = process.env.PORT || 3000;
-
+const PORT = Number(process.env.PORT) || 3000;
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017';
 
 app.use(express.json());
@@ -19,13 +19,12 @@ mongoose
       console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
     });
   })
-  .catch((error) => {
+  .catch((error: Error) => {
     console.error('❌ Error de conexión a MongoDB:', error.message);
   });
 
-app.get('/', (req, res) => {
+app.get('/', (_req: Request, res: Response) => {
   res.send('API para Flutter activa.');
 });
 
-const employeeRoutes = require('./routes/employeeRoutes');
 app.use('/api/employees', employeeRoutes);

@@ -1,6 +1,6 @@
 # API de empleados para Flutter
 
-API REST en Node.js/Express con MongoDB para gestionar empleados (alta, edición, baja, filtros, exportación CSV/PDF e historial de cambios).
+API REST en Node.js/Express con MongoDB y TypeScript para gestionar empleados (alta, edición, baja, filtros, exportación CSV/PDF e historial de cambios).
 
 ## Configuración de base de datos
 
@@ -19,8 +19,9 @@ MONGODB_URI=mongodb+srv://usuario:password@host/base?retryWrites=true&w=majority
 ## Scripts disponibles
 
 - `npm install` para instalar dependencias (PDF es opcional mediante `pdfkit`).
+- `npm run build` para compilar TypeScript a JavaScript en `dist/`.
 - `npm run dev` para correr en modo desarrollo con recarga automática.
-- `npm start` para producción.
+- `npm start` para producción (requiere haber ejecutado `npm run build`).
 
 ## Endpoints principales
 

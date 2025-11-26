@@ -1,6 +1,22 @@
-const mongoose = require('mongoose');
+import { HydratedDocument, Model, Schema, model } from 'mongoose';
 
-const employeeSchema = new mongoose.Schema(
+export type EmployeeStatus = 'activo' | 'inactivo';
+
+export interface EmployeeInput {
+  firstName: string;
+  lastName: string;
+  email: string;
+  area: string;
+  position: string;
+  status?: EmployeeStatus;
+  hireDate?: Date;
+  deactivatedAt?: Date | null;
+  notes?: string;
+}
+
+export type EmployeeDocument = HydratedDocument<EmployeeInput>;
+
+const employeeSchema = new Schema<EmployeeInput>(
   {
     firstName: {
       type: String,
@@ -39,7 +55,8 @@ const employeeSchema = new mongoose.Schema(
       default: Date.now
     },
     deactivatedAt: {
-      type: Date
+      type: Date,
+      default: null
     },
     notes: {
       type: String
@@ -50,4 +67,6 @@ const employeeSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model('Employee', employeeSchema);
+const Employee: Model<EmployeeInput> = model<EmployeeInput>('Employee', employeeSchema);
+
+export default Employee;
